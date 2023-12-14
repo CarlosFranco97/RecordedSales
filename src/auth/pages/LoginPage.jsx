@@ -6,7 +6,7 @@ export const LoginPage = () => {
           <div className="col-12 col-sm-8 col-md-6 m-auto">
             <div className="card">
               <div className="card-body">
-                <form action="">
+                <form>
                   <div className="text-center">
                     Ingreso
                   </div>

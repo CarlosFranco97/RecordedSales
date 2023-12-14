@@ -13,7 +13,7 @@ export const NavBar = () => {
                 Registro de cuadres
             </button>
                 
-            <button type="button" className="btn btn-dark" data-mdb-ripple-init>
+            <button type="button" className="btn btn-outline-danger" data-mdb-ripple-init>
                 <i className="fas fa-sign-out-alt" />
                 &nbsp;
                 Salir
