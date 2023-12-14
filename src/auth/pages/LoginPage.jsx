@@ -1,7 +1,6 @@
 
 export const LoginPage = () => {
   return (
-    <>
       <div className="container mt-5 pt-5">
         <div className="row">
           <div className="col-12 col-sm-8 col-md-6 m-auto">
@@ -33,6 +32,5 @@ export const LoginPage = () => {
           </div>
         </div>
       </div>
-    </>
   )
 }

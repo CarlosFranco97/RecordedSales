@@ -1,6 +1,9 @@
+import { NavBar } from "../"
 
 export const BoxRegister = () => {
   return (
-    <div>BoxRegister</div>
+    <>
+      <NavBar />
+    </>
   )
 }
