@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import { LoginPage } from "../auth";
-import { FormsBoxRegister } from '../register'
+import { BoxRegister, FormsBoxRegister } from '../register'
 
 export const AppRouter = () => {
     const authStatus = 'authenticated' /*not-authenticated */
@@ -13,6 +13,7 @@ export const AppRouter = () => {
             : <Route path="/*" element={<FormsBoxRegister />}/>
             }
             <Route path="/*" element={<Navigate to="/auth/login"/>}/>
+            <Route path="/pages/BoxRegister" element={<BoxRegister/>}/>
         </Routes>
     </>
   )
