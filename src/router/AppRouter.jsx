@@ -3,7 +3,7 @@ import { LoginPage } from "../auth";
 import { BoxRegister, FormsBoxRegister } from '../register'
 
 export const AppRouter = () => {
-    const authStatus = 'not-authenticated'
+    const authStatus = 'authenticated'
     return (
     <>
         <Routes>

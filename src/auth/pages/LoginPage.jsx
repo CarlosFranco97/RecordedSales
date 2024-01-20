@@ -2,7 +2,7 @@ import { ButtonLogin } from "../components/ButtonLogin"
 
 export const LoginPage = () => {
   return (
-      <div className="container mt-5 pt-5">
+      <div className="container pt-5" style={{marginTop: "200px"}}>
         <div className="row">
           <div className="col-12 col-sm-8 col-md-6 m-auto">
             <div className="card">

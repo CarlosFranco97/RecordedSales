@@ -6,13 +6,13 @@ export const NavBar = () => {
 
   const [authStore, dispatch] = useContext(AuthContext);
   return (
-    <div className="navbar navbar-dark mb-4 px-2" 
+    <div className="navbar navbar-dark px-2" 
         style={{backgroundColor: "#e3f2fd"}}>
-        <span className="navbar-brand">
+          <span className="navbar-brand">
             <i className="fa-solid fa-user"></i>
             &nbsp; 
            <span className="text-dark"> Hola, {authStore.user?.name} </span> 
-        </span>
+          </span>
               <Link to="/pages/BoxRegister" type="button" className="btn btn-dark ms-auto mx-2" data-mdb-ripple-init>
                 Registro de cuadres
               </Link>
@@ -26,6 +26,7 @@ export const NavBar = () => {
                 &nbsp;
                 Salir
             </button>
-    </div>
-  )
+    </div> 
+
+  )  
 }
