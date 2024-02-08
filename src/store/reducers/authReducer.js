@@ -1,10 +1,9 @@
 import { types } from "./types"
 
 export const initialAuth = {
-    user: {
-        id: 1234, 
-        name: 'Francos1234'
-    }
+    status: 'checking', //authenticated, not-authenticated
+    user: { },
+    errorMessage: undefined,
 }
 
 export const authReducer = (state, action) => {
@@ -12,13 +11,37 @@ export const authReducer = (state, action) => {
         case types.authLogin:
             return {
                 ...state, 
-                user: initialAuth.user
+                user: action.payload, 
+                status: 'authenticated'
             }
         case types.authLogout: 
             return {
                 ...state,
-                user: null
+                user: null,
+                status: 'not-authenticated'
             }
+
+        case types.authChecking: 
+            return {
+                ...state,
+                user: {},
+                errorMessage: undefined,
+                status: 'checking'
+            }
+
+        case types.errorCredentials:
+            return {   
+                ...state, 
+                user: {},
+                status: 'not-authenticated',
+                errorMessage: action.payload
+            } 
+        
+        case types.clearErrorMessage: 
+         return {
+            ...state, 
+            errorMessage: undefined
+         }
 
         default: 
         state

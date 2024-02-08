@@ -1,9 +1,8 @@
-import { useContext} from "react";
 import { NavBar } from "../"
 import { useForm } from "../../hooks/useForm";
-import { RegisterContext } from "../../store/context";
-import { types } from "../../store/reducers";
 import { InputRegister } from "../components/InputRegister";
+import { useBoxRegisterEvent } from "../../hooks/useBoxRegisterEvent";
+import "animate.css";
 
 const formData = {
   
@@ -15,14 +14,11 @@ const formData = {
 
 export const FormsBoxRegister = () => {
 
+  const { store, startSavingRegister, startLoadingRegister } = useBoxRegisterEvent();
 
-  const [store, dispatch] = useContext(RegisterContext);
-
-  const {  compras, base, monedas, efectivo, formState, onInputChange  } 
-    = useForm(formData);
-    
-  
-  const handleSubmit = (event) => {
+  const {  compras, base, monedas, efectivo, formState, onInputChange  } = useForm(formData);
+      
+  const handleSubmit = async(event) => {
     event.preventDefault(); 
 
     const registro = {
@@ -43,34 +39,29 @@ export const FormsBoxRegister = () => {
 
     const register =  { 
        date: new Date().getTime(),
-      ventas: ventaTotal, 
+       ventas: ventaTotal, 
        efectivo: efectivoTotal, 
        compras: compras 
-      
-      }
-    
-    // console.log(efectivoTotal); 
-    // console.log(ventaTotal)
+      };
 
-    dispatch({ 
-      type: types.addRegister, 
-      payload: register
-    })
+    await startSavingRegister({date: register.date, ventas: register.ventas, efectivo: register.efectivo, compras: register.compras});
+    
+    await startLoadingRegister()
   };
 
-  console.log(store)
+
   return (
-    <>
-    <NavBar/>
-    <InputRegister 
-        handleSubmit={handleSubmit} 
-        onInputChange={onInputChange}
-        compras={compras}
-        base={base}
-        monedas={monedas}
-        efectivo={efectivo}
-        store={store}
-      />
-    </>
+    <div className="animate__animated animate__fadeIn">
+      <NavBar/>
+      <InputRegister 
+          handleSubmit={handleSubmit} 
+          onInputChange={onInputChange}
+          compras={compras}
+          base={base}
+          monedas={monedas}
+          efectivo={efectivo}
+          store={store}
+        />
+    </div>
   )
 }

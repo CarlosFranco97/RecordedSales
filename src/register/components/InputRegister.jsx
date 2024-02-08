@@ -1,10 +1,10 @@
+
 export const InputRegister = ({handleSubmit, onInputChange, compras, base, efectivo, monedas, store}) => {
     return (
-
     <div className="container mt-5 pt-5">
         <div className="row">
             <div className="col-12 col-sm-8 col-md-6 m-auto">
-                <div className="card" 
+                <div className="card border-0 shadow" 
                   style={{backgroundColor: "#e3f2fd"}}
                  >
                  <div className="card-body">
@@ -64,15 +64,13 @@ export const InputRegister = ({handleSubmit, onInputChange, compras, base, efect
             </form>
         </div>
         {
-           (store.length == 0) ? <span className="text-center mb-3">Aún no hay registros</span>
+           (store.register.length === 0) ? <span className="text-center mb-3">Aún no hay registros</span>
            : <div className="mt-1 mb-3 text-center">
                 <strong> Efectivo: </strong>
-                {store[0]?.register.efectivo}
+                {store.register[0]?.efectivo}
                 <strong> Venta: </strong> 
-                {store[0]?.register.ventas}
+                {store.register[0]?.ventas}
             </div>
-           
-        
         }
                 </div>
             </div>

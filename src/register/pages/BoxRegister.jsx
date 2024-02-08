@@ -6,59 +6,59 @@
 //   ventas: 3000000
 // }]
 
-import { useContext } from "react"
-import { RegisterContext } from "../../store/context"
-import { types } from "../../store/reducers";
 import { Link } from "react-router-dom";
+import { useBoxRegisterEvent } from "../../hooks/useBoxRegisterEvent";
+import { useEffect } from "react";
 
 export const BoxRegister = () => {
-  const [store, dispatch] = useContext(RegisterContext);
+  const { store, startLoadingRegister, startDeletingRegister } = useBoxRegisterEvent();
+
+  const handleDelete = async(id) => {
+      await startDeletingRegister(id);
+        startLoadingRegister()
+  };
+
+
+  useEffect(() => {
+    startLoadingRegister()
+  }, [])
+
+
   return (
     <>
-    
-    {
-      (store.length == 0) ? <span>Aún no hay registros...</span>
+     {
+      (store.register.length === 0) ? <span className="animate__animated animate__fadeIn">Aún no hay registros...</span>
       :  
-      store?.map( store => 
-
-      <div key={store._id} className="alert alert-success m-2" role="alert">
-           
-            <div className="d-flex flex-row justify-content-between align-items-center">
+        Object.keys(store.register)?.map( key =>  
+          <div key={store.register[key].id} className="alert alert-success m-2 animate__animated animate__fadeIn border-0 shadow" role="alert">
+                <div className="d-flex flex-row justify-content-between align-items-center">
               <span>
-                {store.register.date} 
+                {store.register[key].date.toString()} 
               </span>
               <div className="d-flex flex-column align-items-center">  
                 <button
-                  onClick={() => dispatch({
-                    type: types.deleteRegister,
-                    payload: store._id
-                  })} 
+                  onClick={() => handleDelete(store.register[key].id)} 
                   className="btn btn-outline-danger">
                   <i className="fa-solid fa-trash"></i>
                 </button>
                   <span>
-                    <strong>Compras:</strong> 
-                      {store.register?.compras}
+                    <strong>Compras: </strong> 
+                      {store.register[key].compras}
                   </span>
                   <span>
                     <strong> Efectivo: </strong> 
-                      {store.register?.efectivo} 
+                      {store.register[key].efectivo} 
                   </span>
                     <span>
                     <strong> Ventas: </strong> 
-                      {store.register?.ventas} 
+                      {store.register[key].ventas} 
                     </span>
-                  
               </div>
             </div>
-          
-          
-      </div>
-
-      )
-      }
-      <div className="d-flex flex-row justify-content-center">
-        <Link to="/" className="btn btn-primary">
+      </div> )
+      } 
+      <div className="d-flex flex-row justify-content-center animate__animated animate__fadeIn">
+        <Link to="/" className="btn btn-outline-primary">
           Volver
         </Link>
       </div>
