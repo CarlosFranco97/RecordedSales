@@ -1,5 +1,10 @@
 # Box Register App
 
+Aplicación creada principalmente para el manejo de los registros de ventas, compras y efectivo a retirar de una empresa de industria panadera.
+Manejo de estado con useReducer y useContext.
+USER: Francos12345
+Password: 123456
+
 ## Development pasos
 1. Renombrar el archivo .env.template por .env
 
