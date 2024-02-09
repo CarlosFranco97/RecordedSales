@@ -1,6 +1,7 @@
 # Box Register App
 
 Aplicación creada principalmente para el manejo de los registros de ventas, compras y efectivo a retirar de una empresa de industria panadera.
+La moneda que se maneja es peso colombiano.
 Manejo de estado con useReducer y useContext.
 USER: Francos12345
 Password: 123456

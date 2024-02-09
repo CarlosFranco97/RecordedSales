@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 export const InputRegister = ({handleSubmit, onInputChange, compras, base, efectivo, monedas, store}) => {
     return (
@@ -5,7 +6,7 @@ export const InputRegister = ({handleSubmit, onInputChange, compras, base, efect
         <div className="row">
             <div className="col-12 col-sm-8 col-md-6 m-auto">
                 <div className="card border-0 shadow" 
-                  style={{backgroundColor: "#e3f2fd"}}
+                  style={{backgroundColor: "#e3f2fd"}}  
                  >
                  <div className="card-body">
                  <form onSubmit={handleSubmit}> 
@@ -65,12 +66,9 @@ export const InputRegister = ({handleSubmit, onInputChange, compras, base, efect
         </div>
         {
            (store.register.length === 0) ? <span className="text-center mb-3">Aún no hay registros</span>
-           : <div className="mt-1 mb-3 text-center">
-                <strong> Efectivo: </strong>
-                {store.register[0]?.efectivo}
-                <strong> Venta: </strong> 
-                {store.register[0]?.ventas}
-            </div>
+           : <Link to="/BoxRegister" className="mt-1 mb-3 text-center">
+                Mirar registros 
+            </Link>
         }
                 </div>
             </div>

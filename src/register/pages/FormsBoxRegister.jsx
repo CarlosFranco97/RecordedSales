@@ -2,7 +2,9 @@ import { NavBar } from "../"
 import { useForm } from "../../hooks/useForm";
 import { InputRegister } from "../components/InputRegister";
 import { useBoxRegisterEvent } from "../../hooks/useBoxRegisterEvent";
+import Swal from "sweetalert2";
 import "animate.css";
+import { useEffect } from "react";
 
 const formData = {
   
@@ -16,7 +18,7 @@ export const FormsBoxRegister = () => {
 
   const { store, startSavingRegister, startLoadingRegister } = useBoxRegisterEvent();
 
-  const {  compras, base, monedas, efectivo, formState, onInputChange  } = useForm(formData);
+  const {  compras, base, monedas, efectivo, formState, onInputChange, onResetForm  } = useForm(formData);
       
   const handleSubmit = async(event) => {
     event.preventDefault(); 
@@ -30,12 +32,15 @@ export const FormsBoxRegister = () => {
 
     const {compras, base, monedas, efectivo} = registro; 
 
-    if(monedas <= 0 || monedas > 60000) return;
-    if(compras < 0 || base < 0 || efectivo < 0) return;  
+    if(monedas <= 0 || monedas > 60000) return Swal.fire('Verifique nuevamente', 'El valor de las monedas en caja no puede ser superior a 60000', 'error')
 
     const efectivoTotal = (base + monedas + efectivo) - 500000
-
+    
     const ventaTotal = efectivoTotal + compras
+    
+    if(efectivoTotal < -50000) return Swal.fire('Verifique nuevamente', 'El valor del efectivo no puede dar ese valor negativo', 'error')
+
+    console.log('efectivo total', efectivoTotal)
 
     const register =  { 
        date: new Date().getTime(),
@@ -46,9 +51,14 @@ export const FormsBoxRegister = () => {
 
     await startSavingRegister({date: register.date, ventas: register.ventas, efectivo: register.efectivo, compras: register.compras});
     
-    await startLoadingRegister()
+    await startLoadingRegister();
+
+    onResetForm();
   };
 
+  useEffect(() => {
+    startLoadingRegister()
+  }, [])
 
   return (
     <div className="animate__animated animate__fadeIn">

@@ -30,7 +30,7 @@ export const BoxRegister = () => {
       (store.register.length === 0) ? <span className="animate__animated animate__fadeIn">Aún no hay registros...</span>
       :  
         Object.keys(store.register)?.map( key =>  
-          <div key={store.register[key].id} className="alert alert-success m-2 animate__animated animate__fadeIn border-0 shadow" role="alert">
+          <div key={store.register[key].id} className={`alert alert-${(store.register[key].efectivo > 0) ?"primary":"danger"} m-2 animate__animated animate__fadeIn border-0 shadow`} role="alert">
                 <div className="d-flex flex-row justify-content-between align-items-center">
               <span>
                 {store.register[key].date.toString()} 
