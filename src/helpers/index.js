@@ -1,2 +1,2 @@
 export * from './getEnvVariables';
-export * from './converEventsToDateEvents';
+export * from './convertDateToDays';

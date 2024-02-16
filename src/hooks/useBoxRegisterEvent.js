@@ -3,7 +3,7 @@ import { AuthContext, RegisterContext } from "../store/context"
 import boxRegisterApi from "../api/boxRegisterApi";
 import { types } from "../store/reducers";
 import Swal from "sweetalert2";
-import { convertEventsToDateEvents } from "../helpers";
+import { convertDateToDays } from "../helpers/convertDateToDays";
 
 export const useBoxRegisterEvent = () => {
     const [store, dispatch] = useContext(RegisterContext); 
@@ -35,7 +35,7 @@ export const useBoxRegisterEvent = () => {
     const startLoadingRegister = async() => {
         try {
             const {data} = await boxRegisterApi.get('/events');
-            const eventDate = convertEventsToDateEvents(data.eventos);
+            const eventDate = convertDateToDays(data.eventos) 
             dispatch({
                 type: types.loadingRegister, 
                 payload: eventDate

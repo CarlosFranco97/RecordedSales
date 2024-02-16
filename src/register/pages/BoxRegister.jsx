@@ -39,29 +39,29 @@ export const BoxRegister = () => {
      {
       (store.register.length === 0) ? <span className="animate__animated animate__fadeIn">Aún no hay registros...</span>
       :  
-        Object.keys(store.register)?.map( key =>  
-          <div key={store.register[key].id} className={`alert alert-${(store.register[key].efectivo > 0) ?"primary":"danger"} m-2 animate__animated animate__fadeIn border-0 shadow`} role="alert">
+        store.register?.map( register =>  
+          <div key={register.id} className={`alert alert-${(register.efectivo > 0) ?"primary":"danger"} m-2 animate__animated animate__fadeIn border-0 shadow`} role="alert">
                 <div className="d-flex flex-row justify-content-between align-items-center">
               <span>
-                {store.register[key].date.toString()} 
+                {register.date.toString()} 
               </span>
               <div className="d-flex flex-column align-items-center">  
                 <button
-                  onClick={() => handleDelete(store.register[key].id)} 
+                  onClick={() => handleDelete(register.id)} 
                   className="btn btn-outline-danger">
                   <i className="fa-solid fa-trash"></i>
                 </button>
                   <span>
                     <strong>Compras: </strong> 
-                      {store.register[key].compras}
+                      {register.compras}
                   </span>
                   <span>
                     <strong> Efectivo: </strong> 
-                      {store.register[key].efectivo} 
+                      {register.efectivo} 
                   </span>
                     <span>
                     <strong> Ventas: </strong> 
-                      {store.register[key].ventas} 
+                      {register.ventas} 
                     </span>
               </div>
             </div>
@@ -70,7 +70,9 @@ export const BoxRegister = () => {
 
       <div className="d-flex flex-row justify-content-center animate__animated animate__fadeIn">
         <CSVLink data={filteredDataToExportExcel} filename="registros-caja.csv" className={`btn btn-outline-secondary mx-2 ${(store.register.length === 0) ? "disabled" : ""}`}>
-          Exportar a PDF
+           <i className="fa-solid fa-file-excel"></i>
+            &nbsp;
+            Exportar a PDF
         </CSVLink>
         <Link to="/" className="btn btn-outline-primary">
           Volver
