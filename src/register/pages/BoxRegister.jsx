@@ -9,16 +9,26 @@
 import { Link } from "react-router-dom";
 import { useBoxRegisterEvent } from "../../hooks/useBoxRegisterEvent";
 import { useEffect } from "react";
+import { CSVLink } from "react-csv";
 
 export const BoxRegister = () => {
+ 
   const { store, startLoadingRegister, startDeletingRegister } = useBoxRegisterEvent();
 
+  const filteredDataToExportExcel = store.register?.map(register => ({
+    Día: register.date, 
+    Compras: register.compras,
+    Efectivo: register.efectivo,
+    Ventas: register.ventas
+  })); 
+
+  
   const handleDelete = async(id) => {
       await startDeletingRegister(id);
         startLoadingRegister()
   };
 
-
+  
   useEffect(() => {
     startLoadingRegister()
   }, [])
@@ -56,8 +66,12 @@ export const BoxRegister = () => {
               </div>
             </div>
       </div> )
-      } 
+      }; 
+
       <div className="d-flex flex-row justify-content-center animate__animated animate__fadeIn">
+        <CSVLink data={filteredDataToExportExcel} filename="registros-caja.csv" className={`btn btn-outline-secondary mx-2 ${(store.register.length === 0) ? "disabled" : ""}`}>
+          Exportar a PDF
+        </CSVLink>
         <Link to="/" className="btn btn-outline-primary">
           Volver
         </Link>
