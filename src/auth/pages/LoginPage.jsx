@@ -28,10 +28,10 @@ export const LoginPage = () => {
 
   
   return ( 
-      <div className="vh-100 row justifiy-content-center align-items-center" style={{backgroundColor: "#8c8c8c"}}>
+      <div className="vh-100 row justifiy-content-center align-items-center" style={{backgroundColor: "#454546"}}>
       <div className="container animate__animated animate__fadeIn">
         <div className="row">
-          <div className="col-12 col-sm-8 col-md-6 col-lg-4 m-auto">
+          <div className="col-12 col-sm-6 col-md-6 col-lg-4 m-auto">
             <div className="card border-0 shadow">
               <div className="card-body text-center">
               <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" className="bi bi-person-circle" viewBox="0 0 16 16">
@@ -42,7 +42,7 @@ export const LoginPage = () => {
                   <div className="form-floating">
                     <input 
                     type="text" 
-                    className="form-control my-4 py-2"
+                    className="form-control mt-4"
                     value={loginName}
                     name="loginName"
                     placeholder="Username"
@@ -54,7 +54,7 @@ export const LoginPage = () => {
                   <div className="form-floating">
                     <input 
                     type="Password" 
-                    className="form-control my-4 py-2" 
+                    className="form-control mt-4" 
                     placeholder="Password"
                     value={loginPassword}
                     name="loginPassword"
