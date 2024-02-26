@@ -68,11 +68,11 @@ export const BoxRegister = () => {
       </div> )
       }; 
 
-      <div className="d-flex flex-row justify-content-center animate__animated animate__fadeIn">
+      <div className="d-flex flex-row justify-content-center animate__animated animate__fadeIn mb-2">
         <CSVLink data={filteredDataToExportExcel} filename="registros-caja.csv" className={`btn btn-outline-secondary mx-2 ${(store.register.length === 0) ? "disabled" : ""}`}>
            <i className="fa-solid fa-file-excel"></i>
             &nbsp;
-            Exportar a PDF
+            Exportar a Excel
         </CSVLink>
         <Link to="/" className="btn btn-outline-primary">
           Volver
