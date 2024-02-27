@@ -9,10 +9,10 @@
 import { Link } from "react-router-dom";
 import { useBoxRegisterEvent } from "../../hooks/useBoxRegisterEvent";
 import { useEffect } from "react";
-import { CSVLink } from "react-csv";
+import { ExportRegisterToExcel } from "../components/exportRegisterToExcel";
 
 export const BoxRegister = () => {
- 
+
   const { store, startLoadingRegister, startDeletingRegister } = useBoxRegisterEvent();
 
   const filteredDataToExportExcel = store.register?.map(register => ({
@@ -69,11 +69,7 @@ export const BoxRegister = () => {
       }; 
 
       <div className="d-flex flex-row justify-content-center animate__animated animate__fadeIn mb-2">
-        <CSVLink data={filteredDataToExportExcel} filename="registros-caja.csv" className={`btn btn-outline-secondary mx-2 ${(store.register.length === 0) ? "disabled" : ""}`}>
-           <i className="fa-solid fa-file-excel"></i>
-            &nbsp;
-            Exportar a Excel
-        </CSVLink>
+        <ExportRegisterToExcel dataToExportExcel={filteredDataToExportExcel} store={store} />
         <Link to="/" className="btn btn-outline-primary">
           Volver
         </Link>
