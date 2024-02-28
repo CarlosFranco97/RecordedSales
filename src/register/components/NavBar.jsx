@@ -10,7 +10,7 @@ export const NavBar = () => {
 
 
     <nav className="navbar navbar-expand-sm navbar-dark px-2 border-0 shadow" 
-    style={{backgroundColor: "#e3f2fd"}}>
+      style={{backgroundColor: "#e3f2fd"}}>
       <div className="container-fluid"> 
         <span className="navbar-brand">
           <i className="fa-solid fa-user"></i>

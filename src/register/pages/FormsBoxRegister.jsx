@@ -40,7 +40,6 @@ export const FormsBoxRegister = () => {
     
     if(efectivoTotal < -50000) return Swal.fire('Verifique nuevamente', 'El valor del efectivo no puede dar ese valor negativo', 'error')
 
-    console.log('efectivo total', efectivoTotal)
 
     const register =  { 
        date: new Date().getTime(),

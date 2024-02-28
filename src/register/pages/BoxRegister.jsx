@@ -6,14 +6,25 @@
 //   ventas: 3000000
 // }]
 
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useBoxRegisterEvent } from "../../hooks/useBoxRegisterEvent";
-import { useEffect } from "react";
 import { ExportRegisterToExcel } from "../components/exportRegisterToExcel";
+import { useReactToPrint } from "react-to-print";
+import { DailyLogs } from "../components/DailyLogs";
 
 export const BoxRegister = () => {
-
+  
   const { store, startLoadingRegister, startDeletingRegister } = useBoxRegisterEvent();
+
+  const componentToPDF = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentToPDF.current,
+    documentTitle: "registros-caja",
+    onAfterPrint: () => alert("Registros guardados en PDF")
+
+  })
 
   const filteredDataToExportExcel = store.register?.map(register => ({
     Día: register.date, 
@@ -35,46 +46,20 @@ export const BoxRegister = () => {
 
 
   return (
-    <>
-     {
-      (store.register.length === 0) ? <span className="animate__animated animate__fadeIn">Aún no hay registros...</span>
-      :  
-        store.register?.map( register =>  
-          <div key={register.id} className={`alert alert-${(register.efectivo > 0) ?"primary":"danger"} m-2 animate__animated animate__fadeIn border-0 shadow`} role="alert">
-                <div className="d-flex flex-row justify-content-between align-items-center">
-              <span>
-                {register.date.toString()} 
-              </span>
-              <div className="d-flex flex-column align-items-center">  
-                <button
-                  onClick={() => handleDelete(register.id)} 
-                  className="btn btn-outline-danger">
-                  <i className="fa-solid fa-trash"></i>
-                </button>
-                  <span>
-                    <strong>Compras: </strong> 
-                      {register.compras}
-                  </span>
-                  <span>
-                    <strong> Efectivo: </strong> 
-                      {register.efectivo} 
-                  </span>
-                    <span>
-                    <strong> Ventas: </strong> 
-                      {register.ventas} 
-                    </span>
-              </div>
-            </div>
-      </div> )
-      }; 
+    <div ref={componentToPDF}>
+      
+      <DailyLogs store={store} handleDelete={handleDelete} />
 
-      <div className="d-flex flex-row justify-content-center animate__animated animate__fadeIn mb-2">
-        <ExportRegisterToExcel dataToExportExcel={filteredDataToExportExcel} store={store} />
-        <Link to="/" className="btn btn-outline-primary">
-          Volver
-        </Link>
+      <div className="d-flex flex-row justify-content-around animate__animated animate__fadeIn mb-2">
+          <ExportRegisterToExcel dataToExcel={filteredDataToExportExcel} store={store} />
+          <button className="btn btn-outline-danger" onClick={handlePrint}>
+             Descargar PDF
+          </button>
+          <Link to="/" className="btn btn-outline-primary">
+             Volver
+          </Link>
       </div>
 
-    </>
+    </div>
   )
 }
