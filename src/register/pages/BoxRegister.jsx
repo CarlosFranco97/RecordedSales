@@ -6,25 +6,43 @@
 //   ventas: 3000000
 // }]
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useBoxRegisterEvent } from "../../hooks/useBoxRegisterEvent";
 import { ExportRegisterToExcel } from "../components/exportRegisterToExcel";
 import { useReactToPrint } from "react-to-print";
 import { DailyLogs } from "../components/DailyLogs";
+import {NavBarBoxRegister} from '../components/NavBarBoxRegister';
 
 export const BoxRegister = () => {
-  
   const { store, startLoadingRegister, startDeletingRegister } = useBoxRegisterEvent();
+  
+  const [startDate, setStartDate] = useState(''); 
 
+  const [endDate, setEndDate] = useState('');
+
+  const [filteredDates, setFilteredDates] = useState(); 
+
+  const handleStartDateSelect = ({target}) => {
+    setStartDate(target.value); 
+  };
+  
+  const handleEndDateSelect = ({target}) => {
+    setEndDate(target.value);
+  }; 
+
+  const handleSearchDates = () => {
+      if(startDate.length === 0 && endDate.length === 0) return;
+      const rangeDatesSelected = store.register?.filter( register => register.date >= startDate && register.date <= endDate );
+      setFilteredDates(rangeDatesSelected);
+    }
+  
   const componentToPDF = useRef();
-
   const handlePrint = useReactToPrint({
     content: () => componentToPDF.current,
     documentTitle: "registros-caja",
     onAfterPrint: () => alert("Registros guardados en PDF")
-
-  })
+  });
 
   const filteredDataToExportExcel = store.register?.map(register => ({
     Día: register.date, 
@@ -32,24 +50,35 @@ export const BoxRegister = () => {
     Efectivo: register.efectivo,
     Ventas: register.ventas
   })); 
-
   
   const handleDelete = async(id) => {
       await startDeletingRegister(id);
         startLoadingRegister()
   };
 
-  
+
   useEffect(() => {
-    startLoadingRegister()
+      startLoadingRegister()
   }, [])
 
-
   return (
-    <div ref={componentToPDF}>
-      
-      <DailyLogs store={store} handleDelete={handleDelete} />
+    <> 
+     
+    <NavBarBoxRegister 
+      startDate={startDate} 
+      endDate={endDate} handleStartDateSelect={handleStartDateSelect} 
+      handleEndDateSelect={handleEndDateSelect}
+      handleSearchDates={handleSearchDates}
+    />
+    <div 
+      ref={componentToPDF}>
 
+      <DailyLogs 
+        store={store} 
+        handleDelete={handleDelete} 
+        filteredDates={filteredDates}
+      /> 
+      
       <div className="d-flex flex-row justify-content-around animate__animated animate__fadeIn mb-2">
           <ExportRegisterToExcel dataToExcel={filteredDataToExportExcel} store={store} />
           <button className="btn btn-outline-danger" onClick={handlePrint}>
@@ -59,7 +88,7 @@ export const BoxRegister = () => {
              Volver
           </Link>
       </div>
-
     </div>
+   </>
   )
 }
