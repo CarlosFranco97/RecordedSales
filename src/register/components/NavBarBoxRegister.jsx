@@ -13,11 +13,10 @@ export const NavBarBoxRegister = ({startDate, endDate, handleStartDateSelect, ha
   
   
   return (
-
-
     <nav className="navbar navbar-expand-sm navbar-dark px-2 border-0 shadow" 
       style={{backgroundColor: "#e3f2fd"}}>
       <div className="container-fluid"> 
+        <h5>Ingrese rango de fechas:</h5> 
         <span className="navbar-brand d-flex flex-row">
             <input 
                 value={startDate}
@@ -29,7 +28,7 @@ export const NavBarBoxRegister = ({startDate, endDate, handleStartDateSelect, ha
                 placeholder="From"
                 style={{width: "140px"}}
               /> 
-              <span className="d-flex justify-content-center align-items-center text-black mx-2"> - </span>
+        <span className="d-flex justify-content-center align-items-center text-black mx-2"> - </span>
               <input 
                   value={endDate}
                   onChange={handleEndDateSelect} 
@@ -44,33 +43,8 @@ export const NavBarBoxRegister = ({startDate, endDate, handleStartDateSelect, ha
 
               <button className="mx-2 rounded btn btn-outline-dark" value="search" onClick={handleSearchDates}>
                 <i className="fa-solid fa-magnifying-glass" />
-              </button>
-             
+              </button>     
         </span>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        {/* <div className="collapse navbar-collapse" id="menu"> */}
-           {/* <ul className="navbar-nav ms-auto">
-              <li className="nav-item"> 
-                  <Link to="/BoxRegister" type="button" className="btn btn-dark ms-auto m-1" data-mdb-ripple-init>
-                    Registro de cuadres
-                  </Link>
-              </li>              
-              <li className="nav-item">
-                <button 
-                    onClick={ () => startLogout()}
-                    type="button" className="btn btn-outline-danger m-1" data-mdb-ripple-init>
-                      <i className="fas fa-sign-out-alt" />
-                      &nbsp;
-                      Salir 
-                </button> */}
-              {/* </li>
-           </ul> */}
-
-        {/* </div> */}
-
-
       </div>
 </nav> 
    

@@ -75,11 +75,13 @@ export const BoxRegister = () => {
 
       <DailyLogs 
         store={store} 
+        startDate={startDate}
+        endDate={endDate}
         handleDelete={handleDelete} 
         filteredDates={filteredDates}
       /> 
       
-      <div className="d-flex flex-row justify-content-around animate__animated animate__fadeIn mb-2">
+      <div className="d-flex flex-row justify-content-around animate__animated animate__fadeIn fixed-bottom">
           <ExportRegisterToExcel dataToExcel={filteredDataToExportExcel} store={store} />
           <button className="btn btn-outline-danger" onClick={handlePrint}>
              Descargar PDF
