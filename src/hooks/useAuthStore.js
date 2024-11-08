@@ -7,7 +7,6 @@ export const useAuthStore = () => {
     const {user, status, errorMessage} = authStore;
     
     const startLogin = async({name, password}) => {
-        
         try {
             dispatch({ 
                 type: types.authChecking
