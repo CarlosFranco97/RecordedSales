@@ -5,9 +5,13 @@ La moneda que se maneja es peso colombiano.
 Manejo de estado con useReducer y useContext.
 
 ## Inicio de sesion: 
-## USER: Francos12345
+## USER: 
+####
+Francos12345
 ###
-## PASSWORD: 123456
+## PASSWORD: 
+###
+123456
 
 ## Pasos para poder descargar y visualizar la app: 
 1. Renombrar el archivo .env.template por .env
