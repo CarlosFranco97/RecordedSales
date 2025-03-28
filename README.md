@@ -4,6 +4,9 @@ Aplicación creada principalmente para el manejo de los registros de ventas, com
 La moneda que se maneja es peso colombiano.
 Manejo de estado con useReducer y useContext.
 
+## Url de la app:
+https://carlosfranco97.github.io/RecordedSales/#/auth/login
+
 ## Inicio de sesion: 
 ## USER: 
 ####
