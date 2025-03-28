@@ -23,21 +23,16 @@ VITE_API_URL=http://localhost:4000/api
 ...
 
 ## Tecnologías utilizadas
+React.js - Para la generación de las interfaces.
 
 Node.js - Entorno de ejecución para JavaScript en el servidor.
 
-Express - Framework minimalista para la creación de API REST.
-
-MongoDB - Base de datos NoSQL para el almacenamiento de registros.
-
-Mongoose - ODM para la manipulación de datos en MongoDB.
+Bootstrap - Manejo de estilos 
 
 
 ## Librerías utilizadas
 
 Dayjs - Manejo y formateo de fechas.
-
-Jsonwebtoken (JWT) - Autenticación y autorización de usuarios.
 
 ExcelJS - Generación de reportes en formato Excel.
 
